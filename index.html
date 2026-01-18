@@ -20,33 +20,32 @@ body {
             font-family: sans-serif; 
             background-color: #f8f9fa; 
             margin: 0; 
-            padding: 0; /* 상단 여백 제거 */
+            padding: 40px 20px; 
             display: flex; 
-            flex-direction: column; /* 위아래로 배치 */
-            align-items: center; 
+            justify-content: center; 
         }
 
-        /* [상단 이미지 스타일] */
-        .top-image {
-            width: 100%;      /* 가로를 꽉 채우거나 */
-            max-width: 500px; /* 최대 너비를 지정할 수 있습니다 */
-            height: auto;
-            display: block;
-            margin: 20px auto; /* 이미지 위아래 여백 */
-        }
-
+        /* 하얀색 박스 (카드) */
         .card { 
             background: white; 
-            width: 90%; 
+            width: 100%; 
             max-width: 450px; 
             padding: 25px; 
             border-radius: 20px; 
             box-shadow: 0 8px 16px rgba(0,0,0,0.1); 
             text-align: center; 
-            margin-bottom: 50px;
         }
 
-        h2 { font-size: 1.1rem; color: #333; margin-bottom: 20px; }
+        /* [박스 내부 상단 이미지 스타일] */
+        .card-top-img {
+            width: 100%;      /* 박스 가로 너비에 맞춤 */
+            max-width: 200px; /* 너무 크면 여기서 조절하세요 */
+            height: auto;
+            margin-bottom: 20px; /* 이미지와 제목 사이 간격 */
+            display: inline-block;
+        }
+
+        h2 { font-size: 1.1rem; color: #333; margin-bottom: 20px; margin-top: 0; }
         input, select { width: 100%; padding: 12px; margin-bottom: 15px; border: 1px solid #ddd; border-radius: 10px; box-sizing: border-box; font-size: 16px; }
         
         #captureArea { 
@@ -62,9 +61,10 @@ body {
 </head>
 <body>
 	
-<img src="Needs_banner.jpg" alt="상단 이미지" class="top-image">
 	
 <div class="card">
+	<img src="Needs_banner.jpg" alt="상단 이미지" class="top-image">
+
     <h2>나만의 문구 미리보기</h2>
     
     <input type="text" id="userInput" placeholder="원하시는 문구를 입력하세요" maxlength="20" oninput="updateText()">
