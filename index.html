@@ -6,77 +6,119 @@
     <title>폰트 미리보기 서비스</title>
     <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
     <style>
-        /* 1. 폰트 등록 (파일 이름은 사장님이 올린 것과 똑같이 수정하세요) */
-        /* @font-face { font-family: 'Gangwon'; src: url('gangwon2.ttf'); } */
-		/* @font-face { font-family: 'Gangwon'; src: url('gangwon3.ttf') format('truetype'); } */
-		@font-face { font-family: 'Gangwon'; src: url('gangwon3.woff2') format('woff2'); }
-        @font-face { font-family: 'Balral'; src: url('balral.ttf'); }
-        @font-face { font-family: 'Kyobo'; src: url('kyobo.ttf'); }
-        @font-face { font-family: 'Binna'; src: url('binna.ttf'); }
-		@font-face { font-family: 'Bazzi'; src: url('bazzi.ttf'); }
-		@font-face { font-family: 'Demong'; src: url('demong.ttf'); }
-        @font-face { font-family: 'Eng_gummy'; src: url('Eng_gummy.ttf'); }
-		@font-face { font-family: 'Eng_Script'; src: url('Eng_Script.ttf'); }
+        /* 1. 폰트 등록 (파일 경로가 정확한지 확인하세요) */
+        @font-face { font-family: 'Gangwon'; src: url('gangwon3.woff2') format('woff2'); font-display: swap; }
+        @font-face { font-family: 'Balral'; src: url('balral.ttf'); font-display: swap; }
+        @font-face { font-family: 'Kyobo'; src: url('kyobo.ttf'); font-display: swap; }
+        @font-face { font-family: 'Binna'; src: url('binna.ttf'); font-display: swap; }
+        @font-face { font-family: 'Bazzi'; src: url('bazzi.ttf'); font-display: swap; }
+        @font-face { font-family: 'Demong'; src: url('demong.ttf'); font-display: swap; }
+        @font-face { font-family: 'Eng_gummy'; src: url('Eng_gummy.ttf'); font-display: swap; }
+        @font-face { font-family: 'Eng_Script'; src: url('Eng_Script.ttf'); font-display: swap; }
 
-		body, input, select, button, textarea { font-family: 'Gangwon', sans-serif !important; }
-		
-body { 
-            font-family: sans-serif; 
-            background-color: #f8f9fa; 
+        /* 기본 스타일 */
+        body { 
+            font-family: 'Gangwon', sans-serif; 
+            background-color: #f0f2f5; 
             margin: 0; 
-            padding: 40px 20px; 
+            padding: 20px; 
             display: flex; 
             justify-content: center; 
+            align-items: center;
+            min-height: 100vh;
         }
 
-        /* 하얀색 박스 (카드) */
         .card { 
             background: white; 
             width: 100%; 
-            max-width: 450px; 
-            padding: 25px; 
-            border-radius: 20px; 
-            box-shadow: 0 8px 16px rgba(0,0,0,0.1); 
+            max-width: 400px; 
+            padding: 30px; 
+            border-radius: 24px; 
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05); 
             text-align: center; 
         }
 
-        /* [박스 내부 상단 이미지 스타일] */
-        .card-top-img {
-            width: 100%;      /* 박스 가로 너비에 맞춤 */
-            max-width: 200px; /* 너무 크면 여기서 조절하세요 */
+        /* 상단 이미지 스타일 수정 */
+        .top-image {
+            width: 100%;
+            max-width: 180px; 
             height: auto;
-            margin-bottom: 20px; /* 이미지와 제목 사이 간격 */
-            display: inline-block;
+            margin-bottom: 20px;
+            border-radius: 10px;
         }
 
-        h2 { font-size: 1.1rem; color: #333; margin-bottom: 20px; margin-top: 0; }
-        input, select { width: 100%; padding: 12px; margin-bottom: 15px; border: 1px solid #ddd; border-radius: 10px; box-sizing: border-box; font-size: 16px; }
+        h2 { font-size: 1.2rem; color: #333; margin-bottom: 25px; letter-spacing: -0.5px; }
         
-        #captureArea { 
-            width: 100%; height: 200px; background: #fff; border: 1px solid #eee; 
-            display: flex; align-items: center; justify-content: center; 
-            margin-bottom: 20px; border-radius: 10px;
+        input, select { 
+            width: 100%; 
+            padding: 14px; 
+            margin-bottom: 12px; 
+            border: 1px solid #e1e1e1; 
+            border-radius: 12px; 
+            box-sizing: border-box; 
+            font-size: 16px;
+            outline-color: #000;
         }
-        /* #previewText { font-size: 32px; color: #333; white-space: pre-wrap; word-break: break-all; } */
-        #previewText { font-family: 'Gangwon'; font-size: 32px; color: #333; white-space: pre-wrap; word-break: break-all; }
-		
-        button { width: 100%; padding: 15px; background: #000; color: white; border: none; border-radius: 10px; font-size: 16px; font-weight: bold; cursor: pointer; }
-        .info { font-size: 12px; color: #888; margin-top: 15px; line-height: 1.4; }
-		
+
+        /* 미리보기 영역 디자인 강화 */
+        #captureArea { 
+            width: 100%; 
+            height: 180px; 
+            background: #fafafa; 
+            border: 1px dashed #ddd; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            margin: 20px 0; 
+            border-radius: 15px;
+            overflow: hidden; /* 글자가 넘칠 경우 방지 */
+            padding: 10px;
+            box-sizing: border-box;
+        }
+
+        #previewText { 
+            font-size: 32px; 
+            color: #222; 
+            white-space: pre-wrap; 
+            word-break: break-all; 
+            line-height: 1.2;
+            text-align: center;
+        }
+        
+        button { 
+            width: 100%; 
+            padding: 16px; 
+            background: #000; 
+            color: white; 
+            border: none; 
+            border-radius: 12px; 
+            font-size: 16px; 
+            font-weight: bold; 
+            cursor: pointer; 
+            transition: background 0.3s;
+        }
+
+        button:hover { background: #333; }
+
+        .info { 
+            font-size: 13px; 
+            color: #999; 
+            margin-top: 20px; 
+            line-height: 1.6; 
+            word-break: keep-all;
+        }
     </style>
 </head>
 <body>
-	
-	
+    
 <div class="card">
-	<img src="Needs_banner.jpg" alt="상단 이미지" class="top-image">
+    <img src="Needs_banner.jpg" alt="로고" class="top-image">
 
     <h2>나만의 문구 미리보기</h2>
     
     <input type="text" id="userInput" placeholder="원하시는 문구를 입력하세요" maxlength="20" oninput="updateText()">
     
     <select id="fontSelect" onchange="updateText()">
-        <!-- <option value="Eng_Script">폰트를 고르세요</option> -->
         <option value="Gangwon">강원교육 모두체</option>
         <option value="Balral">(한글/영문)귀염발랄체</option>
         <option value="Kyobo">교보 우선아체</option>
@@ -88,37 +130,40 @@ body {
     </select>
 
     <div id="captureArea">
-        <div id="previewText">미리보기</div>
+        <div id="previewText" style="font-family: 'Gangwon';">미리보기</div>
     </div>
-	
-	<!-- /*
-    <button onclick="saveImage()">이미지 저장하기</button>
+    
+    <!-- <button onclick="saveImage()">이미지 저장하기</button>
     
     <div class="info">
         * 저장된 이미지를 네이버 톡톡으로 보내주시면<br>확인 후 제작해 드립니다!
-    </div>
-	*/ -->
+    </div> -->
 </div>
 
 <script>
+    // 텍스트 업데이트 함수
     function updateText() {
         const input = document.getElementById('userInput').value;
         const font = document.getElementById('fontSelect').value;
         const preview = document.getElementById('previewText');
+        
         preview.innerText = input || "미리보기";
         preview.style.fontFamily = font;
     }
 
-    // function saveImage() {
-    //     html2canvas(document.getElementById('captureArea')).then(canvas => {
-    //         const link = document.createElement('a');
-    //         link.download = 'order_preview.png';
-    //         link.href = canvas.toDataURL();
-    //         link.click();
-    //     });
-    // }
-
-	
+    // 이미지 저장 함수 (주석 해제 및 보완)
+    function saveImage() {
+        const area = document.getElementById('captureArea');
+        html2canvas(area, {
+            backgroundColor: "#ffffff", // 저장 시 배경색 지정
+            scale: 2 // 화질을 2배로 높여서 저장
+        }).then(canvas => {
+            const link = document.createElement('a');
+            link.download = 'font_preview_' + new Date().getTime() + '.png';
+            link.href = canvas.toDataURL();
+            link.click();
+        });
+    }
 </script>
 
 </body>
