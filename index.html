@@ -4,128 +4,131 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>폰트 미리보기 서비스</title>
-    
-    <link href="https://cdn.jsdelivr.net/npm/@noonnu/gangwon-edu-otf-bold-a@0.1.0/index.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@noonnu/gangwon-edu-otf-bold-a@1.0.0/index.min.css">
     
     <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
-    
     <style>
-        /* 1. 기타 로컬 폰트 등록 (파일이 폴더에 있어야 함) */
-        @font-face { font-family: 'Balral'; src: url('balral.ttf'); font-display: swap; }
-        @font-face { font-family: 'Kyobo'; src: url('kyobo.ttf'); font-display: swap; }
-        @font-face { font-family: 'Binna'; src: url('binna.ttf'); font-display: swap; }
-        @font-face { font-family: 'Bazzi'; src: url('bazzi.ttf'); font-display: swap; }
-        @font-face { font-family: 'Demong'; src: url('demong.ttf'); font-display: swap; }
-        @font-face { font-family: 'Eng_gummy'; src: url('Eng_gummy.ttf'); font-display: swap; }
-        @font-face { font-family: 'Eng_Script'; src: url('Eng_Script.ttf'); font-display: swap; }
+        /* 2. 나머지 폰트 등록 (CDN이 없는 것들은 기존 방식 유지) */
+        /* 만약 다른 폰트들도 안 나온다면 같은 방식으로 CDN을 찾아서 넣으면 좋습니다. */
+        @font-face { font-family: 'Bazzi'; src: url('bazzi.ttf'); }
+        @font-face { font-family: 'Kyobo'; src: url('kyobo.ttf'); }
+        @font-face { font-family: 'Binna'; src: url('binna.ttf'); }
+        @font-face { font-family: 'Balral'; src: url('balral.ttf'); }
 
-        /* 기본 스타일 */
-        body {
-            /* CDN에서 정의한 폰트 이름 'GangwonEduOTFBoldA' 사용 */
-            font-family: 'GangwonEduOTFBoldA', sans-serif;
-            background-color: #f8f9fa;
-            margin: 0;
-            padding: 40px 20px;
-            display: flex;
-            justify-content: center;
-            min-height: 100vh;
-        }
-
-        .card {
-            background: #fff;
-            width: 100%;
-            max-width: 400px;
-            padding: 25px;
-            border-radius: 20px;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-            text-align: center;
-        }
-
-        .top-image { width: 100%; max-width: 180px; margin-bottom: 20px; }
-        h2 { font-size: 1.1rem; color: #333; margin-bottom: 20px; }
+        /* [중요] CDN으로 불러온 폰트 이름 설정 */
+        /* 사장님이 가져온 CDN의 폰트 패밀리 이름은 'GangwonEdu_OTF_BoldA' 입니다. */
         
-        input, select {
-            width: 100%; padding: 12px; margin-bottom: 15px;
-            border: 1px solid #ddd; border-radius: 10px;
-            box-sizing: border-box; font-size: 16px; font-family: inherit;
+        body { 
+            font-family: 'GangwonEdu_OTF_BoldA', sans-serif; 
+            background-color: #f8f9fa; 
+            margin: 0; 
+            padding: 40px 20px; 
+            display: flex; 
+            justify-content: center; 
         }
 
-        #captureArea {
-            width: 100%; height: 200px; background: #fff;
-            border: 1px solid #eee; border-radius: 10px;
-            display: flex; align-items: center; justify-content: center;
+        .card { 
+            background: white; 
+            width: 100%; 
+            max-width: 450px; 
+            padding: 25px; 
+            border-radius: 20px; 
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1); 
+            text-align: center; 
+        }
+
+        .card-top-img {
+            width: 100%;
+            max-width: 200px;
+            height: auto;
             margin-bottom: 20px;
+            display: inline-block;
         }
 
-        #previewText {
-            font-size: 32px; color: #333; text-align: center;
-            white-space: pre-wrap; word-break: break-all;
-            /* 초기 로딩 시 폰트 이름 변경 */
-            font-family: 'GangwonEduOTFBoldA'; 
+        h2 { font-size: 1.1rem; color: #333; margin-bottom: 20px; margin-top: 0; }
+        
+        input, select { 
+            width: 100%; 
+            padding: 12px; 
+            margin-bottom: 15px; 
+            border: 1px solid #ddd; 
+            border-radius: 10px; 
+            box-sizing: border-box; 
+            font-size: 16px; 
+            font-family: inherit; /* 입력창에도 기본 폰트 적용 */
+        }
+        
+        #captureArea { 
+            width: 100%; 
+            height: 200px; 
+            background: #fff; 
+            border: 1px solid #eee; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            margin-bottom: 20px; 
+            border-radius: 10px;
         }
 
-        .btn-save {
-            width: 100%; padding: 15px; background: #000;
-            color: #fff; border: none; border-radius: 10px;
-            font-size: 16px; font-weight: bold; cursor: pointer;
+        #previewText { 
+            font-size: 32px; 
+            color: #333; 
+            white-space: pre-wrap; 
+            word-break: break-all;
+            font-family: 'GangwonEdu_OTF_BoldA'; /* 기본값 설정 */
         }
-
-        .info { font-size: 12px; color: #888; margin-top: 15px; line-height: 1.5; }
+        
+        button { width: 100%; padding: 15px; background: #000; color: white; border: none; border-radius: 10px; font-size: 16px; font-weight: bold; cursor: pointer; }
+        .info { font-size: 12px; color: #888; margin-top: 15px; line-height: 1.4; }
     </style>
 </head>
 <body>
 
-<div class="card">
-    <img src="Needs_banner.jpg" alt="로고" class="top-image">
-    <h2>나만의 문구 미리보기</h2>
-    
-    <input type="text" id="userInput" placeholder="문구를 입력하세요" maxlength="20" oninput="updateText()">
-    
-    <select id="fontSelect" onchange="updateText()">
-        <option value="GangwonEduOTFBoldA">강원교육 모두체</option>
-        <option value="Balral">(한글/영문)귀염발랄체</option>
-        <option value="Kyobo">교보 우선아체</option>
-        <option value="Binna">이빈나체</option>
-        <option value="Bazzi">배찌체</option> 
-        <option value="Demong">데몽 고딕체</option>
-        <option value="Eng_gummy">(영문)Gummy체</option>
-        <option value="Eng_Script">(영문)Script체</option>
-    </select>
+    <div class="card">
+        <img src="top-banner.png" alt="상단 이미지" class="card-top-img">
 
-    <div id="captureArea">
-        <div id="previewText">미리보기</div>
+        <h2>문구 미리보기</h2>
+        
+        <input type="text" id="userInput" placeholder="내용을 입력하세요" maxlength="20" oninput="updateText()">
+        
+        <select id="fontSelect" onchange="updateText()">
+            <option value="GangwonEdu_OTF_BoldA">강원교육모두체</option>
+            <option value="Bazzi">배찌체</option>
+            <option value="Kyobo">교보손글씨체</option>
+            <option value="Binna">이빈나체</option>
+            <option value="Balral">귀염발랄체</option>
+        </select>
+
+        <div id="captureArea">
+            <div id="previewText">미리보기</div>
+        </div>
+
+        <button onclick="saveImage()">이미지 저장하기</button>
+        
+        <div class="info">
+            * 저장된 이미지를 톡톡으로 보내주시면<br>확인 후 예쁘게 제작해 드립니다!
+        </div>
     </div>
-    
-</div>
 
-<script>
-    function updateText() {
-        const input = document.getElementById('userInput').value;
-        const font = document.getElementById('fontSelect').value;
-        const preview = document.getElementById('previewText');
-        
-        preview.innerText = input || "미리보기";
-        preview.style.fontFamily = font;
-    }
-
-    function saveImage() {
-        const area = document.getElementById('captureArea');
-        if(!document.getElementById('userInput').value) {
-            alert("문구를 입력해주세요!"); return;
+    <script>
+        function updateText() {
+            const input = document.getElementById('userInput').value;
+            const font = document.getElementById('fontSelect').value;
+            const preview = document.getElementById('previewText');
+            preview.innerText = input || "미리보기";
+            preview.style.fontFamily = font;
         }
-        
-        html2canvas(area, { 
-            backgroundColor: "#ffffff", 
-            scale: 2, 
-            useCORS: true 
-        }).then(canvas => {
-            const link = document.createElement('a');
-            link.download = 'preview.png';
-            link.href = canvas.toDataURL();
-            link.click();
-        });
-    }
-</script>
+
+        function saveImage() {
+            const area = document.getElementById('captureArea');
+            html2canvas(area, { scale: 2 }).then(canvas => {
+                const link = document.createElement('a');
+                link.download = 'order_preview.png';
+                link.href = canvas.toDataURL();
+                link.click();
+            });
+        }
+    </script>
 
 </body>
 </html>
