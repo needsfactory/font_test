@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>폰트 미리보기</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@noonnu/gangwon-edu-otf-bold-a@1.0.0/index.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@noonnu/gangwon-edu-otf-bold-a@0.1.0/index.min.css">
     
     <style>
         /* 폰트 등록 (파일로 올린 것들) */
@@ -12,11 +13,12 @@
         @font-face { font-family: 'Kyobo'; src: url('kyobo.ttf'); }
         @font-face { font-family: 'Binna'; src: url('binna.ttf'); }
         @font-face { font-family: 'Balral'; src: url('balral.ttf'); }
-
+        @font-face {font-family:GangwonEdu_OTFBoldA;src:url('fonts/gangwoneduotfbolda-normal.woff') format('woff');font-weight:400;font-style:normal}
+        
         /* [중요] CDN 실제 폰트 이름: GangwonEduOTFBoldA */
         
         body { 
-            font-family: 'GangwonEduOTFBoldA', sans-serif; 
+            font-family: 'GangwonEdu_OTFBoldA', sans-serif; 
             background-color: #f8f9fa; 
             margin: 0; 
             padding: 40px 20px; 
@@ -77,21 +79,21 @@
             white-space: pre-wrap; 
             word-break: break-all;
             /* 초기 로딩 시 강원교육체 강제 적용 */
-            font-family: 'GangwonEduOTFBoldA'; 
+            font-family: 'GangwonEdu_OTFBoldA'; 
         }
     </style>
 </head>
 <body>
 
     <div class="card">
-        <img src="Needs-banner.jpg" alt="상단 이미지" class="card-top-img">
+        <img src="Needs_banner.jpg" alt="상단 이미지" class="card-top-img">
 
         <h2>문구 미리보기</h2>
         
         <input type="text" id="userInput" placeholder="내용을 입력해 보세요" maxlength="20" oninput="updateText()">
         
         <select id="fontSelect" onchange="updateText()">
-            <option value="GangwonEduOTFBoldA">강원교육모두체</option>
+            <option value="GangwonEdu_OTFBoldA">강원교육모두체</option>
             <option value="Bazzi">배찌체</option>
             <option value="Kyobo">교보손글씨체</option>
             <option value="Binna">이빈나체</option>
