@@ -186,26 +186,26 @@
     }
 
     /** 2. 이미지 저장 기능 */
-    // function saveImage() {
-    //     const area = document.getElementById('captureArea');
-    //     const inputText = document.getElementById('userInput').value.trim();
+     function saveImage() {
+         const area = document.getElementById('captureArea');
+         const inputText = document.getElementById('userInput').value.trim();
         
-    //     if(!inputText) {
-    //         alert("문구를 먼저 입력해 주세요!");
-    //         return;
-    //     }
+         if(!inputText) {
+             alert("문구를 먼저 입력해 주세요!");
+             return;
+         }
 
-    //     html2canvas(area, {
-    //         backgroundColor: "#ffffff",
-    //         scale: 2, // 2배 고해상도로 저장
-    //         logging: false,
-    //         useCORS: true // 외부 폰트(CDN) 허용 설정
-    //     }).then(canvas => {
-    //         const link = document.createElement('a');
-    //         link.download = 'order_' + inputText + '.png';
-    //         link.href = canvas.toDataURL('image/png');
-    //         link.click();
-    //     });
+     html2canvas(area, {
+             backgroundColor: "#ffffff",
+         scale: 2, // 2배 고해상도로 저장
+             logging: false,
+         useCORS: true // 외부 폰트(CDN) 허용 설정
+         }).then(canvas => {
+             const link = document.createElement('a');
+             link.download = 'order_' + inputText + '.png';
+             link.href = canvas.toDataURL('image/png');
+             link.click();
+         });
     }
 </script>
 
